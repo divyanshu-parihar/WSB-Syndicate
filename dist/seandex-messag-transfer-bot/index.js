@@ -19,6 +19,8 @@ client.on('ready', (client) => {
 });
 client.on('messageCreate', (message) => {
     var _a;
+    console.log(message.content);
+    console.log(message.id);
     if (((_a = message.guild) === null || _a === void 0 ? void 0 : _a.id) != config_1.default.senderGuildId)
         return;
     if (!message.channel.isTextBased())
@@ -27,8 +29,6 @@ client.on('messageCreate', (message) => {
     let allchannels = config_1.default.mapping[id];
     if (!allchannels)
         return;
-    console.log('receiver channels', allchannels);
-    console.log(message);
     allchannels.forEach((id) => {
         try {
             const channel = client.channels.cache.get(id);
@@ -36,14 +36,11 @@ client.on('messageCreate', (message) => {
                 return;
             if (!(channel === null || channel === void 0 ? void 0 : channel.isTextBased()))
                 return;
-            console.log(message.channel.id);
-            console.log(message.content);
             if (message.content) {
-                const text = message.content.replace(/<@&\d+>/g, '');
-                if (text != '')
-                    channel.send({
-                        content: message.content.replace(/<@&\d+>/g, '')
-                    });
+                channel.send({
+                    content: message.content.replace(/<@&\d+>/g, '')
+                });
+                console.log(channel.url);
                 console.log(`Message Sent : ${message.channel.id} to ${channel.id}`);
             }
             if (message.attachments.first() != undefined) {
@@ -59,7 +56,6 @@ client.on('messageCreate', (message) => {
                     embeds: [...message.embeds],
                 });
             }
-            //                  client.channels.cache.get(channel).send('<@&804789597460365319>')
         }
         catch (e) {
             console.log(e);

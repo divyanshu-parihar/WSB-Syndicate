@@ -2,10 +2,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-interface configType {
+export interface configType {
     token: string;
     mapping: { [key: string]: string[] },
-    receriverGuildId: string;
+    receiverGuildId: string;
     senderGuildId: string;
     owner: string;
     admins: string[];
@@ -35,7 +35,7 @@ const config: configType = {
         '1143875915181473812': ['1197766844363313183'], // 500-to-5000
 
     },
-    receriverGuildId: '1197765930067968150',
+    receiverGuildId: '1197765930067968150',
     senderGuildId: '682259216861626378',
     owner: "510716396276285440",
     admins: ['510716396276285440']
